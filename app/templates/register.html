@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST">
+<br>
+    <div align ="center">
+    {{ form.hidden_tag() }}
+    <div class="jumbotron"><!--The form inside the jumbotron container!-->
+    <h1> Create account!</h1><!--The form relating to creating account goes here!-->
+    <br><br><!--Filling up with black spaces to deal with white sapces, labels and the forms.-->
+    <h5>{{form.email.label}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.email()}}</h5><br><br>
+    <h5>{{form.username.label}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.username()}}</h5><br><br>
+    <h5>{{form.password.label}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.password()}}</h5><br><br>
+    <h5>{{form.pass_confirm.label}}&nbsp;&nbsp;&nbsp;&nbsp;{{form.pass_confirm()}}</h5><br><br><br>
+    <div align="center">{{form.submit()}} </div>
+    </div>
+    </div>
+</form>
+{% endblock %}

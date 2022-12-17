@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Bootstrap links copied from the Bootstrap website!-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styling.css')}}">
+
+    <!--Fonts taken from the website: https://fonts.google.com-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=Encode+Sans:wght@200&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <ul class="nav navbar-dark bg-dark">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}"><h5>About Us</h5></a></li>
+        {% if current_user.is_authenticated %}  <!--The follwing nav-bar items will only show if and only if the authenticated user has logged in!-->
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('allperfumes') }}"><h5>All Perfumes</h5></a></li>
+        <li class="nav-link"><a href="{{ url_for('changepassword') }}"><h5>Change Password</h5></a></li>
+        <li class="nav-link"><a href="{{ url_for('Mystuff') }}"><h5>Account</h5></a></li>
+        <li class="nav-link"><a href="{{ url_for('logout') }}"><h5>Log out</h5></a></li>
+        {% else %}
+        <!--Otherwise, the following nav-items will be shown if the user is not logged in!-->
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}"><h5>Home</h5></a></li>
+        <li class="nav-link"><a href="{{ url_for('register') }}"><h5>Register</h5></a></li>
+        <li class="nav-link"><a href="{{ url_for('login') }}"><h5>Log In</h5></a></li>
+        {% endif %}
+    </ul>
+
+    <br>
+    
+    <!--Image locating perfectly in the center within the container for all the web pages user jinja templating inheritance that extends from this page!-->
+    <div class="container">
+      <div class="d-flex justify-content-center"><img src="../static/images/logo.png" id="logo" width="200" href="{{ url_for('index') }}" height="160" class="center"></div>
+        {% block content %}
+        <br>
+        
+        {% endblock %}
+    </div>
+    <br><br>
+    <!--Copyright footer!-->
+    <div class="footer">
+      <p>Copyright&copy; 2022, WickedLab. All Rights Reserved.</p>
+    </div>
+
+    </body>
+</html>

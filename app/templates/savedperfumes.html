@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<!--This page greets the user by their username and shows all the saved or items that are added to the cart!-->
+<br><br>
+<div class="jumbotron">
+<h2>Welcome {{username}}!</h2><br><br>
+<h5> 
+    This page displays your cart for our limited-edtion products that are only availble exclusively for our premium-customers!
+    Project yourself project your own personality with a uniques scent that is unique and exceptionally rare to the wider world.  
+</h5>
+
+</div>
+
+<div class="container px-4 px-lg-5 mt-5">
+    <h2>Saved Perfumes: </h2>
+    <h4> </h4>
+    <br>
+    <!--2 cards shown per row-->
+    {% for data_row in data | batch(2) %}
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
+        {% for col in data_row %}
+        <div class="col mb-5 ">
+            <div class="card h-100 card bg-light mb-3">
+                <img class="card-img-top" src="{{col.image}}" alt="Card image cap" />
+                <div class="card-body p-4">
+                    <div class="left"><!--All the text on the left!-->
+                        <h5 class="fw-bolder">{{col.pname}}</h5>
+                        £ {{col.price}}<br><br>
+                        <h6>{{col.description}}</h6><br><br>
+                        <div class="text-right"><!--Remove button on the right!-->
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#del_modal">Remove</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modals used as similar to the original reference from Bootstrap: https://getbootstrap.com/docs/4.0/components/modal/-->
+                <div class="modal" tabindex="-1" role="dialog" id="del_modal">
+                    <div class="modal-dialog" role="document">
+                       <div class="modal-content">
+                           <div class="modal-header">
+                               <h5 class="modal-title">Remove from cart?</h5>
+                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                   <span aria-hidden="true">&times;</span>
+                               </button>
+                           </div>
+                       <div class="modal-body">
+                           <p>Are you sure you want to remove from the cart?</p>
+                       </div>
+                       <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                               <form action="/remove_perfume/{{col.id}}" method="POST">
+                                   <input class="btn btn-danger" type="submit" value="Delete">
+                               </form>
+                           </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+ {% block content %}
+<br><br>
+<div class = "jumbotron">
+<h2>Discover Perfumes!</h2>
+<h5><br>Most of our frangraces resembles olfactory notes normally found in a forest lush with nature, from bark, roots, resins and leaves to moss, grass and fir trees. 
+    These fragrances are packed with personality and are perfect for special occasions. Unveil your bolder, captivating side!
+    <br><br>
+    A journey to new sensory experiences with warmer and spicier notes and sweet hints of vanilla, ambergris, even tonka bean. 
+    These fragrances will wrap you in an atmosphere that is at once sensual and mysterious. 
+    Break free from the more classic and traditional scents! Discover our oriental fragrances and transmit the fantasy of the scents and flavours of the Orient.
+</h5>
+</div>
+
+<div class="container px-4 px-lg-5 mt-5">
+    <!--2 cards shown per row-->
+    {% for data_row in data | batch(2) %}
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
+        {% for col in data_row %}
+        <div class="col mb-5 ">
+            <div class="card h-100 card bg-light mb-3">
+                <img class="card-img-top" src="{{col.image}}" alt="Card image cap" />
+                <div class="card-body p-4">
+                    <div class="left"><!--All the text on left alignment!-->
+                        <h5 class="fw-bolder">{{col.pname}}</h5>
+                        £ {{col.price}}<br><br>
+                        <h6>{{col.description}}</h6>
+                    </div>
+                </div>
+
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-right"><!--The button on right alignment!-->
+                    <form action  ="/add_perfume/{{col.id}}" method = "post" onsubmit ="PopupDel()">
+                    <input type = "submit" class = "btn btn-outline-secondary" value = "Add Perfume"></div> 
+                </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
